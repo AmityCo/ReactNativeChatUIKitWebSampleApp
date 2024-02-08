@@ -17,7 +17,8 @@ frontend:
           fi
     build:
       commands:
-        - expo build:web
+        - npx expo export --platform web
+        - npx serve dist
   artifacts:
     baseDirectory: web-build
     files:
