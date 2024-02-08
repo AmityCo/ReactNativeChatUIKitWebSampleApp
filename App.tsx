@@ -1,12 +1,14 @@
-import * as React from 'react';
+import * as React from "react";
+import { Amplify } from "aws-amplify";
+import amplifyconfig from "./src/amplifyconfiguration.json";
+Amplify.configure(amplifyconfig);
 
 import {
   AmityUiKitProvider,
   AmityUiKitChat,
-} from '@amityco/react-native-chat-ui-kit';
+} from "@amityco/react-native-chat-ui-kit";
 
 export default function App() {
-
   return (
     <AmityUiKitProvider
       apiKey="b3babb0b3a89f4341d31dc1a01091edcd70f8de7b23d697f"
