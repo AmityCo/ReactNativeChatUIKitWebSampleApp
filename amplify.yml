@@ -6,6 +6,7 @@ frontend:
         - nvm use 18
         - npm install --quiet --global expo-cli
         - yarn
+        - yarn add crypto-browserify
         - >
           if [ -f yarn.lock ]; then
             yarn
