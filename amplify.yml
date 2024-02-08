@@ -5,6 +5,7 @@ frontend:
       commands:
         - nvm use 18
         - npm install --silent --global expo-cli
+        - yarn
         - yarn install
         - |-
           if [ -f yarn.lock ]; then
