@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Linking } from 'react-native'
+import { Amplify } from "aws-amplify";
+import amplifyconfig from "./src/amplifyconfiguration.json";
+Amplify.configure(amplifyconfig);
+
 import {
   AmityUiKitProvider,
   AmityUiKitChat,
-} from '@amityco/react-native-chat-ui-kit';
+} from "@amityco/react-native-chat-ui-kit";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState<boolean>(false)
