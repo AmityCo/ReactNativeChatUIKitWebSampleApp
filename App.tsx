@@ -17,24 +17,8 @@ import Chat from './Chat';
 import Social from './Social';
 
 export default function App() {
-  const [darkMode, setDarkMode] = useState<boolean>(false)
-  const [primaryColor, setPrimaryColor] = useState<string>()
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const darkMode = urlParams.get('darkMode');
-    const primary = urlParams.get('primary');
-    console.log('primary: ', primary);
-    if (darkMode === 'true') {
-      setDarkMode(true)
-    }
-    if(primary){
-      setPrimaryColor(`#${primary}`)
-    }
-  }, [])
-  const myTheme = {
-    primary: primaryColor, // Primary color for main elements
-  };
+
   return (
     <Router>
 

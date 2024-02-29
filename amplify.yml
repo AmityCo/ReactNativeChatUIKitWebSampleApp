@@ -26,3 +26,8 @@ frontend:
     paths:
       - node_modules/**/*
       - $(npm root --global)/**/*
+  hosting:
+    redirects:
+      - source: </*|/(social|chat)/*>
+        target: /index.html
+        status: 200

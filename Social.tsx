@@ -11,29 +11,33 @@ import { Text } from 'react-native'
 export default function Social() {
   const [darkMode, setDarkMode] = useState<boolean>(false)
   const [primaryColor, setPrimaryColor] = useState<string>()
-
+  const [apiKey, setApiKey] = useState<string>('')
+  const [userId, setUserId] = useState<string>('')
+  const [apiRegion, setApiRegion] = useState<string>('sg')
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const darkMode = urlParams.get('darkMode');
     const primary = urlParams.get('primary');
+    const apiKey = urlParams.get('apiKey');
+    const userId = urlParams.get('userId');
     console.log('primary: ', primary);
     if (darkMode === 'true') {
       setDarkMode(true)
     }
-    if (primary) {
-      setPrimaryColor(`#${primary}`)
-    }
+    if(primary)  setPrimaryColor(`#${primary}`)
+    if(apiKey) setApiKey(apiKey)
+    if(userId) setUserId(userId)
   }, [])
   const myTheme = {
     primary: primaryColor, // Primary color for main elements
   };
   return (
     <AmityUiKitProvider
-      apiKey="b3babb0b3a89f4341d31dc1a01091edcd70f8de7b23d697f"
-      apiRegion="sg"
-      userId="John"
-      displayName="John"
-      apiEndpoint="https://api.sg.amity.co"
+      apiKey={apiKey}
+      apiRegion={apiRegion}
+      userId={userId}
+      displayName={userId}
+      apiEndpoint={`https://api.${apiRegion}.amity.co`}
       theme={myTheme}
       darkMode={darkMode}
     >
