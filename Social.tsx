@@ -2,21 +2,13 @@ import React, { useEffect, useState } from 'react';
 // import { Amplify } from "aws-amplify";
 // import amplifyconfig from "./src/amplifyconfiguration.json";
 // Amplify.configure(amplifyconfig);
-    
+
 import {
   AmityUiKitProvider,
-  AmityUiKitChat,
-} from "@amityco/react-native-chat-ui-kit";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import Chat from './Chat';
-import Social from './Social';
-
-export default function App() {
+  AmityUiKitSocial,
+} from "@amityco/react-native-social-ui-kit";
+import { Text } from 'react-native'
+export default function Social() {
   const [darkMode, setDarkMode] = useState<boolean>(false)
   const [primaryColor, setPrimaryColor] = useState<string>()
 
@@ -28,7 +20,7 @@ export default function App() {
     if (darkMode === 'true') {
       setDarkMode(true)
     }
-    if(primary){
+    if (primary) {
       setPrimaryColor(`#${primary}`)
     }
   }, [])
@@ -36,20 +28,17 @@ export default function App() {
     primary: primaryColor, // Primary color for main elements
   };
   return (
-    <Router>
+    <AmityUiKitProvider
+      apiKey="b3babb0b3a89f4341d31dc1a01091edcd70f8de7b23d697f"
+      apiRegion="sg"
+      userId="John"
+      displayName="John"
+      apiEndpoint="https://api.sg.amity.co"
+      theme={myTheme}
+      darkMode={darkMode}
+    >
+      <AmityUiKitSocial />
 
-            <Routes>
-              <Route path="/" element={<Navigate to="/social" replace />} />
-              <Route
-                path="/social"
-                element={
-               <Social/>
-                } />
-              <Route path="/chat" element={
-                <Chat/>
-              } />
-            </Routes>
-
-        </Router>
+    </AmityUiKitProvider>
   );
 }

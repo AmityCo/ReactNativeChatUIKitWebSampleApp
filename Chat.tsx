@@ -7,16 +7,8 @@ import {
   AmityUiKitProvider,
   AmityUiKitChat,
 } from "@amityco/react-native-chat-ui-kit";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import Chat from './Chat';
-import Social from './Social';
 
-export default function App() {
+export default function Chat() {
   const [darkMode, setDarkMode] = useState<boolean>(false)
   const [primaryColor, setPrimaryColor] = useState<string>()
 
@@ -36,20 +28,16 @@ export default function App() {
     primary: primaryColor, // Primary color for main elements
   };
   return (
-    <Router>
-
-            <Routes>
-              <Route path="/" element={<Navigate to="/social" replace />} />
-              <Route
-                path="/social"
-                element={
-               <Social/>
-                } />
-              <Route path="/chat" element={
-                <Chat/>
-              } />
-            </Routes>
-
-        </Router>
+    <AmityUiKitProvider
+      apiKey="b3babb0b3a89f4341d31dc1a01091edcd70f8de7b23d697f"
+      apiRegion="sg"
+      userId="John"
+      displayName="John"
+      apiEndpoint="https://api.sg.amity.co"
+      darkMode={darkMode}
+      theme={myTheme}
+    >
+      <AmityUiKitChat />
+    </AmityUiKitProvider>
   );
 }
