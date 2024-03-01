@@ -27,7 +27,6 @@ export default function Social() {
     const primary = urlParams.get('primary');
     const apiKey = urlParams.get('apiKey');
     const userId = urlParams.get('userId');
-
     if (darkMode === 'true') {
       setDarkMode(true)
     }
