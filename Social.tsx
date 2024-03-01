@@ -25,6 +25,8 @@ export default function Social() {
     console.log('apiKey: ', apiKey);
     const userId = urlParams.get('userId');
     console.log('primary: ', primary);
+    const apiRegion = urlParams.get('apiRegion');
+    console.log('apiRegion: ', apiRegion);
     if (darkMode === 'true') {
       setDarkMode(true)
     }
