@@ -25,6 +25,7 @@ export default function Chat() {
     const primary = urlParams.get("primary");
     const apiKey = urlParams.get("apiKey");
     const userId = urlParams.get("userId");
+    const apiRegion = urlParams.get("apiRegion");
     if (apiRegion) setApiRegion(apiRegion);
     if (darkMode === "true") {
       setDarkMode(true);
