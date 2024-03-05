@@ -48,8 +48,8 @@ export default function Chat() {
     <AmityUiKitProvider
       apiKey={apiKey}
       apiRegion={apiRegion}
-      userId={'Anna'}
-      displayName={'Anna'}
+      userId={userId}
+      displayName={userId}
       apiEndpoint={`https://api.${apiRegion}.amity.co`}
       theme={myTheme}
       darkMode={darkMode}
