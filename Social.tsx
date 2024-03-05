@@ -33,6 +33,7 @@ export default function Social() {
     const background = urlParams.get('background');
     const text = urlParams.get('text');
     const subTitle = urlParams.get('subtitle');
+    const apiRegion = urlParams.get('apiRegion');
     if (darkMode === 'true') {
       setDarkMode(true)
     }
