@@ -16,6 +16,9 @@ export default function Social() {
   const styles = useStyles()
   const [darkMode, setDarkMode] = useState<boolean>(false)
   const [primaryColor, setPrimaryColor] = useState<string>()
+  const [textBodyColor, setTextBodyColor] = useState<string>('')
+  const [textSubColor, setTextSubColor] = useState<string>('')
+  const [background, setBackground] = useState<string>('')
   const [apiKey, setApiKey] = useState<string>('')
   const [userId, setUserId] = useState<string>('')
   const [apiRegion, setApiRegion] = useState<string>('sg')
@@ -27,6 +30,9 @@ export default function Social() {
     const primary = urlParams.get('primary');
     const apiKey = urlParams.get('apiKey');
     const userId = urlParams.get('userId');
+    const background = urlParams.get('background');
+    const text = urlParams.get('text');
+    const subTitle = urlParams.get('subtitle');
     if (darkMode === 'true') {
       setDarkMode(true)
     }
@@ -34,6 +40,10 @@ export default function Social() {
     if (apiKey) setApiKey(apiKey)
     if (userId) setUserId(userId)
     if (apiRegion) setApiRegion(apiRegion)
+    if(background) setBackground(`#${background}`)
+    if(text) setTextBodyColor(`#${text}`)
+    if(subTitle) setTextSubColor(`#${subTitle}`)
+
     setTimeout(() => {
       setLoading(false)
     }, 1000);
@@ -41,10 +51,15 @@ export default function Social() {
 
   const myTheme = {
     primary: primaryColor, // Primary color for main elements
+    background: background,
+    base: textBodyColor,
+    baseShade1: textSubColor,
+    baseShade2: textSubColor,
+    baseShade3: textSubColor,
   };
 
 
-
+  console.log('myTheme: ', myTheme);
 
 
   return (

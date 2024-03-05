@@ -42,12 +42,12 @@ export default function Chat() {
   };
 
   return (
-    apiKey &&
+    (apiKey && userId) &&
     <AmityUiKitProvider
       apiKey={apiKey}
       apiRegion={apiRegion}
-      userId={userId}
-      displayName={userId}
+      userId={'Anna'}
+      displayName={'Anna'}
       apiEndpoint={`https://api.${apiRegion}.amity.co`}
       theme={myTheme}
       darkMode={darkMode}

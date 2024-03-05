@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@amityco/react-native-chat-ui-kit": "./amityco-react-native-chat-ui-kit-0.1.3.tgz",
-    "@amityco/react-native-social-ui-kit": "./amityco-react-native-social-ui-kit-0.2.7.tgz",
+    "@amityco/react-native-social-ui-kit": "./amityco-react-native-social-ui-kit-0.3.1.tgz",
     "@expo/metro-runtime": "~3.1.3",
     "@react-navigation/native": "^6.1.10",
     "@react-navigation/native-stack": "^6.9.18",
