@@ -18,7 +18,7 @@ export default function Social() {
   const [primaryColor, setPrimaryColor] = useState<string>()
   const [textBodyColor, setTextBodyColor] = useState<string>('')
   const [textSubColor, setTextSubColor] = useState<string>('')
-  const [background, setBackground] = useState<string>('')
+  const [background, setBackground] = useState<string>('#FFFFFF')
   const [apiKey, setApiKey] = useState<string>('')
   const [userId, setUserId] = useState<string>('')
   const [apiRegion, setApiRegion] = useState<string>('sg')
@@ -36,6 +36,7 @@ export default function Social() {
     const apiRegion = urlParams.get('apiRegion');
     if (darkMode === 'true') {
       setDarkMode(true)
+      setBackground('#191919')
     }
     if (primary) setPrimaryColor(`#${primary}`)
     if (apiKey) setApiKey(apiKey)
