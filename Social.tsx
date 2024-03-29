@@ -23,7 +23,6 @@ export default function Social() {
   const [textSubColor, setTextSubColor] = useState<string>('')
   const [background, setBackground] = useState<string>('#FFFFFF')
   const [apiKey, setApiKey] = useState<string>('')
-  console.log('apiKey: ', apiKey);
 
   const [userId, setUserId] = useState<string>('')
   const [apiRegion, setApiRegion] = useState<string>('eu')
@@ -39,6 +38,10 @@ export default function Social() {
     const text = urlParams.get('text');
     const subTitle = urlParams.get('subtitle');
     const category = urlParams.get('category');
+    const apiKey = urlParams.get('apiKey');
+    const apiRegion = urlParams.get('apiRegion');
+
+
     if (darkMode === 'true') {
       setDarkMode(true)
       setBackground('#191919')
@@ -48,7 +51,13 @@ export default function Social() {
     if (background) setBackground(`#${background}`)
     if (text) setTextBodyColor(`#${text}`)
     if (subTitle) setTextSubColor(`#${subTitle}`)
-    chooseCategoryApiKey(category as string)
+    if (apiKey && apiRegion) {
+      setApiKey(apiKey)
+      setApiRegion(apiRegion)
+    } else {
+      chooseCategoryApiKey(category as string)
+    }
+
     setTimeout(() => {
       setLoading(false)
     }, 1000);
