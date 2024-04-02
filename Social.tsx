@@ -25,6 +25,7 @@ export default function Social() {
   const [apiKey, setApiKey] = useState<string>('')
 
   const [userId, setUserId] = useState<string>('')
+  const [displayName, setDisplayName] = useState<string>('')
   const [apiRegion, setApiRegion] = useState<string>('eu')
   const [loading, setLoading] = useState<boolean>(true)
 
@@ -34,6 +35,7 @@ export default function Social() {
     const darkMode = urlParams.get('darkMode');
     const primary = urlParams.get('primary');
     const userId = urlParams.get('userId');
+    const displayName = urlParams.get('displayName');
     const background = urlParams.get('background');
     const text = urlParams.get('text');
     const subTitle = urlParams.get('subtitle');
@@ -48,6 +50,7 @@ export default function Social() {
     }
     if (primary) setPrimaryColor(`#${primary}`)
     if (userId) setUserId(userId)
+    if(displayName) setDisplayName(displayName)
     if (background) setBackground(`#${background}`)
     if (text) setTextBodyColor(`#${text}`)
     if (subTitle) setTextSubColor(`#${subTitle}`)
@@ -110,7 +113,7 @@ export default function Social() {
       apiKey={apiKey}
       apiRegion={apiRegion}
       userId={userId}
-      displayName={userId}
+      displayName={displayName}
       apiEndpoint={`https://api.${apiRegion}.amity.co`}
       theme={myTheme}
       darkMode={darkMode}
