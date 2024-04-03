@@ -114,6 +114,22 @@
     socket.io-client "2.2.0"
     ts-jest "^28.0.3"
 
+"@amityco/ts-sdk@^6.20.1":
+  version "6.20.1"
+  resolved "https://registry.yarnpkg.com/@amityco/ts-sdk/-/ts-sdk-6.20.1.tgz#798fbf916cb30c5b6f50efa783940be470c8d01a"
+  integrity sha512-GBGe9cRrnR4U4yoDpoAjxzlg5JunNP0k+BE7izu4YCpdCf+6pmGPaX9YtRmM+nQh4rmODvJs7i8H3UjZedeV9A==
+  dependencies:
+    agentkeepalive "^4.2.1"
+    axios "^1.2.3"
+    debug "^4.3.4"
+    hls.js "^1.4.10"
+    js-base64 "^3.7.2"
+    mitt "^3.0.0"
+    mqtt "^4.3.7"
+    object-hash "^3.0.0"
+    react-native-uuid "^2.0.1"
+    socket.io-client "2.2.0"
+
 "@ampproject/remapping@^2.2.0":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.2.1.tgz#99e8e11851128b8702cd57c33684f1d0f260b630"

@@ -9,7 +9,10 @@ import {
 import { ActivityIndicator, Text, View } from 'react-native'
 import { StyleSheet } from 'react-native';
 import { API_KEY_GAMING, API_KEY_SPORT, API_KEY_FITNESS, API_KEY_FINANCIAL, API_KEY_TRAVEL, API_KEY_DEFAULT } from '@env';
-
+import {
+  Client,
+  CommunityRepository,
+} from "@amityco/ts-sdk";
 
 
 export default function Social() {
@@ -28,6 +31,80 @@ export default function Social() {
   const [displayName, setDisplayName] = useState<string>('')
   const [apiRegion, setApiRegion] = useState<string>('eu')
   const [loading, setLoading] = useState<boolean>(true)
+
+  const [isConnected, setIsConnected] = useState<boolean>(false)
+
+  const [communityIds, setCommunityIds] = useState<string[]>([])
+
+
+  Client.createClient(apiKey, 'eu', {
+    apiEndpoint: { http: 'https://api.eu.amity.co' },
+  });
+
+
+  const handleConnect = async (userId: string, displayName: string) => {
+
+
+    const response = await Client.login(
+      {
+        userId: userId,
+        displayName: displayName
+      },
+      sessionHandler,
+    );
+    if (response) {
+      setIsConnected(true)
+    }
+
+  };
+
+
+  const sessionHandler: Amity.SessionHandler = {
+    sessionWillRenewAccessToken(renewal: Amity.AccessTokenRenewal) {
+      // for details on other renewal methods check session handler
+      renewal.renew();
+    },
+  };
+
+  const searchCommunity = () => {
+    console.log('searchCommunity: ');
+    CommunityRepository.getCommunities(
+      { membership: 'all', limit: 10 },
+      ({ data }) => {
+        const communityIds = data.map(item => item.communityId)
+        setCommunityIds(communityIds)
+      }
+    );
+  };
+
+  const autoJoinUser = async () => {
+    try {
+      const joinPromises = communityIds.map((communityId) => {
+
+        const isJoined = CommunityRepository.joinCommunity(communityId)
+        return isJoined
+      });
+      const res = await Promise.all(joinPromises);
+      if (res.length > 0) setLoading(false)
+    } catch (error) {
+      console.error(`Failed to join communities: ${error}`);
+      // Handle error if needed
+    }
+  }
+
+  useEffect(() => {
+    autoJoinUser()
+  }, [communityIds])
+
+  useEffect(() => {
+
+    if (isConnected) searchCommunity()
+
+  }, [isConnected])
+
+  useEffect(() => {
+    if (apiKey.length > 0) handleConnect(userId, displayName)
+  }, [apiKey])
 
 
   useEffect(() => {
@@ -50,7 +127,7 @@ export default function Social() {
     }
     if (primary) setPrimaryColor(`#${primary}`)
     if (userId) setUserId(userId)
-    if(displayName) setDisplayName(displayName)
+    if (displayName) setDisplayName(displayName)
     if (background) setBackground(`#${background}`)
     if (text) setTextBodyColor(`#${text}`)
     if (subTitle) setTextSubColor(`#${subTitle}`)
@@ -61,9 +138,7 @@ export default function Social() {
       chooseCategoryApiKey(category as string)
     }
 
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000);
+
   }, [])
 
   const chooseCategoryApiKey = (category: string) => {
@@ -72,7 +147,7 @@ export default function Social() {
         setApiKey(API_KEY_TRAVEL)
         break;
       case 'financial':
-        setApiKey(API_KEY_TRAVEL)
+        setApiKey(API_KEY_FINANCIAL)
         break;
 
       case 'fitness':
