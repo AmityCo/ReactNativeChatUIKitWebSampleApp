@@ -6,13 +6,9 @@ import {
   AmityUiKitProvider,
   AmityUiKitSocial,
 } from "@amityco/react-native-social-ui-kit";
-import { ActivityIndicator, Text, View } from 'react-native'
+import { ActivityIndicator, View } from 'react-native'
 import { StyleSheet } from 'react-native';
 import { API_KEY_GAMING, API_KEY_SPORT, API_KEY_FITNESS, API_KEY_FINANCIAL, API_KEY_TRAVEL, API_KEY_DEFAULT } from '@env';
-import {
-  Client,
-  CommunityRepository,
-} from "@amityco/ts-sdk";
 
 
 export default function Social() {
@@ -32,78 +28,85 @@ export default function Social() {
   const [apiRegion, setApiRegion] = useState<string>('eu')
   const [loading, setLoading] = useState<boolean>(true)
 
-  const [isConnected, setIsConnected] = useState<boolean>(false)
-
-  const [communityIds, setCommunityIds] = useState<string[]>([])
-
-
-  Client.createClient(apiKey, 'eu', {
-    apiEndpoint: { http: 'https://api.eu.amity.co' },
-  });
-
-
-  const handleConnect = async (userId: string, displayName: string) => {
-
-
-    const response = await Client.login(
-      {
-        userId: userId,
-        displayName: displayName
-      },
-      sessionHandler,
-    );
-    if (response) {
-      setIsConnected(true)
-    }
-
-  };
-
-
-  const sessionHandler: Amity.SessionHandler = {
-    sessionWillRenewAccessToken(renewal: Amity.AccessTokenRenewal) {
-      // for details on other renewal methods check session handler
-      renewal.renew();
-    },
-  };
-
-  const searchCommunity = () => {
-    console.log('searchCommunity: ');
-    CommunityRepository.getCommunities(
-      { membership: 'all', limit: 10 },
-      ({ data }) => {
-        const communityIds = data.map(item => item.communityId)
-        setCommunityIds(communityIds)
-      }
-    );
-  };
 
   const autoJoinUser = async () => {
     try {
-      const joinPromises = communityIds.map((communityId) => {
-
-        const isJoined = CommunityRepository.joinCommunity(communityId)
-        return isJoined
+      const response = await fetch('https://apix.eu.amity.co/api/v4/sessions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey
+        },
+        body: JSON.stringify({ userId: userId, deviceId: userId }),
       });
-      const res = await Promise.all(joinPromises);
-      if (res.length > 0) setLoading(false)
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const { accessToken } = await response.json();
+      if (accessToken) queryCommunities(accessToken);
+
+
     } catch (error) {
-      console.error(`Failed to join communities: ${error}`);
-      // Handle error if needed
+      console.error('Error:', error);
+    }
+  };
+
+  const queryCommunities = async (accessToken: string) => {
+    try {
+      const response = await fetch('https://apix.eu.amity.co/api/v3/communities?isDeleted=false', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'Authorization': `Bearer ${accessToken}` 
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      const communityIds = data.communities.map((item: { communityId: string; }) => item.communityId)
+      const joinPromises = communityIds.map((communityId: string) => joinUserToCommunity(communityId, accessToken));
+
+      const results = await Promise.all(joinPromises);
+      if (results.length > 0) { setLoading(false) }
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  const joinUserToCommunity = async (communityId: string, accessToken: string) => {
+    try {
+      const response = await fetch(`https://apix.eu.amity.co/api/v3/communities/${communityId}/join`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'Authorization': `Bearer ${accessToken}`
+        },
+
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      if (data) return true
+
+
+    } catch (error) {
+      console.error('Error:', error);
     }
   }
 
   useEffect(() => {
-    autoJoinUser()
-  }, [communityIds])
-
-  useEffect(() => {
-
-    if (isConnected) searchCommunity()
-
-  }, [isConnected])
-
-  useEffect(() => {
-    if (apiKey.length > 0) handleConnect(userId, displayName)
+    if (apiKey) autoJoinUser()
   }, [apiKey])
 
 
