@@ -82,7 +82,10 @@ export default function Social() {
 
       const results = await Promise.all(joinPromises);
       if (results.length > 0) {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 200);
+
       }
     } catch (error) {
       console.error("Error:", error);
