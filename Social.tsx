@@ -36,9 +36,9 @@ export default function Social() {
   useEffect(() => {
     const handleMessage = (event: any) => {
       // Check the origin of the message to ensure it's from a trusted source
-      if (event.origin !== 'http://localhost:3000') { // Change this to the actual origin of your parent
-        return;
-      }
+      // if (event.origin !== 'http://localhost:3000') { // Change this to the actual origin of your parent
+      //   return;
+      // }
 
       if (event.data.action === 'theme') {
         if (event.data.data === 'light') {
