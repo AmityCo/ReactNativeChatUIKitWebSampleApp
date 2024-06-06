@@ -24,14 +24,62 @@ export default function Social() {
   const [primaryColor, setPrimaryColor] = useState<string>();
   const [textBodyColor, setTextBodyColor] = useState<string>("");
   const [textSubColor, setTextSubColor] = useState<string>("");
+  const [border, setBorder] = useState<string>("");
   const [background, setBackground] = useState<string>("#FFFFFF");
   const [apiKey, setApiKey] = useState<string>("");
 
-  const [userId, setUserId] = useState<string>("");
-  const [displayName, setDisplayName] = useState<string>("");
+  const [userId, setUserId] = useState<string>("top");
+  const [displayName, setDisplayName] = useState<string>("top");
   const [apiRegion, setApiRegion] = useState<string>("eu");
   const [loading, setLoading] = useState<boolean>(true);
 
+  useEffect(() => {
+    const handleMessage = (event:any) => {
+      // Check the origin of the message to ensure it's from a trusted source
+      // if (event.origin !== 'http://localhost:3000') { // Change this to the actual origin of your parent
+      //   return;
+      // }
+      // Handle the received message
+      if (event.data.action === 'theme') {
+        if (event.data.data === 'light') {
+          setDarkMode(false)
+          setBackground("#FFFFFF");
+          setTextBodyColor("#292b32")
+          setTextSubColor("#898e9e")
+        }
+        else {
+          setDarkMode(true)
+          setBackground("#191919");
+          setTextBodyColor("#FFFFFF")
+          setTextSubColor("#FFFFFF")
+        }
+      }
+      if (event.data.action === 'category') {
+        chooseCategoryApiKey(event.data.data)
+      }
+
+      if (event.data.action === 'saveTheme') {
+        console.log('saveTheme: ', event.data.data);
+        const { primary, background, base, baseShade1, border } = event.data.data
+        setPrimaryColor(primary)
+        setBackground(background)
+        setTextBodyColor(base)
+        setTextSubColor(baseShade1)
+        setBorder(border)
+
+      }
+      console.log('Message received from parent playground:', event.data);
+    };
+
+    window.addEventListener('message', handleMessage, false);
+
+    // Send a message to the parent window
+
+
+    return () => {
+      window.removeEventListener('message', handleMessage, false);
+    };
+  }, []);
   const autoJoinUser = async () => {
     try {
       const response = await fetch("https://apix.eu.amity.co/api/v4/sessions", {
@@ -126,7 +174,7 @@ export default function Social() {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const darkMode = urlParams.get("darkMode");
+    // const darkMode = urlParams.get("darkMode");
     const primary = urlParams.get("primary");
     const userId = urlParams.get("userId");
     const displayName = urlParams.get("displayName");
@@ -137,23 +185,27 @@ export default function Social() {
     const apiKey = urlParams.get("apiKey");
     const apiRegion = urlParams.get("apiRegion");
 
-    if (darkMode === "true") {
-      setDarkMode(true);
-      setBackground("#191919");
+    if (category) {
+      chooseCategoryApiKey(category);
     }
-    if (primary) setPrimaryColor(`#${primary}`);
+
+    // if (darkMode === "true") {
+    //   setDarkMode(true);
+    //   setBackground("#191919");
+    // }
+    // if (primary) setPrimaryColor(`#${primary}`);
     if (userId) setUserId(userId);
     if (displayName) setDisplayName(displayName);
-    if (background) setBackground(`#${background}`);
-    if (text) setTextBodyColor(`#${text}`);
-    if (subTitle) setTextSubColor(`#${subTitle}`);
-    if (apiKey && apiRegion) {
-      setApiKey(apiKey);
-      setApiRegion(apiRegion);
-      setLoading(false);
-    } else {
-      chooseCategoryApiKey(category as string);
-    }
+    // if (background) setBackground(`#${background}`);
+    // if (text) setTextBodyColor(`#${text}`);
+    // if (subTitle) setTextSubColor(`#${subTitle}`);
+    // if (apiKey && apiRegion) {
+    //   setApiKey(apiKey);
+    //   setApiRegion(apiRegion);
+    //   setLoading(false);
+    // } else {
+    // chooseCategoryApiKey('travel');
+    // }
   }, []);
 
   const chooseCategoryApiKey = (category: string) => {
@@ -192,6 +244,8 @@ export default function Social() {
     baseShade1: textSubColor,
     baseShade2: textSubColor,
     baseShade3: textSubColor,
+    border: border
+
   };
 
   return (
@@ -205,6 +259,7 @@ export default function Social() {
         theme={myTheme}
         darkMode={darkMode}
       >
+
         {loading ? (
           <View style={loading ? styles.loadingContainer : styles.hide}>
             <ActivityIndicator color={primaryColor} size="large" />
@@ -212,6 +267,7 @@ export default function Social() {
         ) : (
           <AmityUiKitSocial />
         )}
+
       </AmityUiKitProvider>
     )
   );
