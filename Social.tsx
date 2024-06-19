@@ -17,7 +17,7 @@ import {
   API_KEY_DEFAULT,
   API_KEY_AUTOMOTIVE,
 } from "@env";
-import config from './uikit.config.json'
+import config from "./uikit.config.json";
 
 export default function Social() {
   const styles = useStyles();
@@ -27,72 +27,74 @@ export default function Social() {
   const [textSubColor, setTextSubColor] = useState<string>("");
   const [background, setBackground] = useState<string>("#FFFFFF");
   const [apiKey, setApiKey] = useState<string>("");
-  console.log('apiKey: ', apiKey);
+  console.log("apiKey: ", apiKey);
 
   const [userId, setUserId] = useState<string>("topAmity");
   const [displayName, setDisplayName] = useState<string>("topAmity");
   const [apiRegion, setApiRegion] = useState<string>("eu");
   const [loading, setLoading] = useState<boolean>(true);
 
-  const [uiKitConfig, setUIKitConfig] = useState({ ...config })
-  
+  const [uiKitConfig, setUIKitConfig] = useState({ ...config });
 
   useEffect(() => {
-    const handleMessage = (event) => {
-      console.log('Message event received:', event);
+    const handleMessage = (event: { data: { payload: any } }) => {
+      console.log("Message event received:", event);
       // if (event.origin !== 'http://localhost:3000') { // Match this to the parent origin
       //   console.log('Origin mismatch, message ignored.');
       //   return;
       // }
-      const data = event.data.payload
-      if (data.type === 'theme') {
-        if (data.value === 'dark') {
-          setUIKitConfig(prevConfig => ({
+      const data = event.data.payload;
+      if (data.type === "theme") {
+        if (data.value === "dark") {
+          setUIKitConfig((prevConfig) => ({
             ...prevConfig,
-            preferred_theme: 'dark'
+            preferred_theme: "dark",
           }));
-          setDarkMode(true)
-        }else{
-          setUIKitConfig(prevConfig => ({
+          setDarkMode(true);
+        } else {
+          setUIKitConfig((prevConfig) => ({
             ...prevConfig,
-            preferred_theme: 'light'
+            preferred_theme: "light",
           }));
-          setDarkMode(false)
+          setDarkMode(false);
         }
         // Handle theme change
       }
-      if(data.type === "saveTheme"){
-        if(darkMode){
-          setUIKitConfig(prevConfig => ({
+      if (data.type === "saveTheme") {
+        if (darkMode) {
+          setUIKitConfig((prevConfig) => ({
             ...prevConfig,
             theme: {
               ...prevConfig.theme,
               dark: {
                 ...prevConfig.theme.dark,
-                primary_color: data.value.primary
-              }
-            }
+                primary_color: data.value.primary,
+              },
+            },
           }));
-        }else{
-          setUIKitConfig(prevConfig => ({
+        } else {
+          setUIKitConfig((prevConfig) => ({
             ...prevConfig,
             theme: {
               ...prevConfig.theme,
               light: {
                 ...prevConfig.theme.light,
-                primary_color: data.value.primary
-              }
-            }
+                primary_color: data.value.primary,
+              },
+            },
           }));
         }
       }
-      console.log('Message received from parent playground:', event.data.payload);
+      console.log(
+        "Message received from parent playground:",
+        event.data.payload
+      );
     };
 
-    window.addEventListener('message', handleMessage, false);
+    window.addEventListener("message", handleMessage, false);
 
     return () => {
-      window.removeEventListener('message', handleMessage, false);
+      window.removeEventListener("message", handleMessage, false);
     };
   }, []);
 
@@ -149,7 +151,6 @@ export default function Social() {
         setTimeout(() => {
           setLoading(false);
         }, 200);
-
       }
     } catch (error) {
       console.error("Error:", error);
@@ -220,7 +221,7 @@ export default function Social() {
     //   setApiRegion(apiRegion);
     //   setLoading(false);
     // } else {
-    chooseCategoryApiKey('travel');
+    chooseCategoryApiKey("travel");
     // }
   }, []);
 
@@ -260,7 +261,6 @@ export default function Social() {
     baseShade1: textSubColor,
     baseShade2: textSubColor,
     baseShade3: textSubColor,
-
   };
 
   return (
@@ -273,7 +273,6 @@ export default function Social() {
         apiEndpoint={`https://api.${apiRegion}.amity.co`}
         configs={uiKitConfig}
       >
-
         {loading ? (
           <View style={loading ? styles.loadingContainer : styles.hide}>
             <ActivityIndicator color={primaryColor} size="large" />
@@ -281,7 +280,6 @@ export default function Social() {
         ) : (
           <AmityUiKitSocial />
         )}
-
       </AmityUiKitProvider>
     )
   );

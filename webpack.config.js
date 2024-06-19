@@ -1,7 +1,9 @@
 module.exports = {
-  resolve: {
-    fallback: {
-      crypto: false,
-    },
+  output: {
+    // Ensuring it outputs an ES Module type
+    libraryTarget: "module",
+  },
+  experiments: {
+    outputModule: true,
   },
 };
