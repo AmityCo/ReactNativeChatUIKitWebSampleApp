@@ -2,15 +2,7 @@ import "@amityco/ui-kit/dist/index.css";
 import React, { useEffect, useState } from "react";
 import { AmityUiKitProvider, AmityLiveChatPage } from "@amityco/ui-kit";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
-import {
-  API_KEY_GAMING,
-  API_KEY_SPORT,
-  API_KEY_FITNESS,
-  API_KEY_FINANCIAL,
-  API_KEY_TRAVEL,
-  API_KEY_DEFAULT,
-  API_KEY_AUTOMOTIVE,
-} from "@env";
+import { ASC_APPLICATIONS } from "@env";
 import config from "./uikit.config.json";
 
 export default function LiveChat() {
@@ -25,6 +17,7 @@ export default function LiveChat() {
   const [channelId, setChannelId] = useState<string>(
     "6672911bf26ca561a56cc334"
   );
+  const [videoFileId, setVideoFileId] = useState<string>("");
   const [uiKitConfig, setUIKitConfig] = useState({ ...config });
   const [displayName, setDisplayName] = useState<string>("");
 
@@ -105,37 +98,14 @@ export default function LiveChat() {
   }, []);
 
   const chooseCategoryApiKey = (category: string) => {
-    switch (category) {
-      case "travel":
-        setApiKey(API_KEY_TRAVEL);
-        setChannelId("667292f74cf3400e79df2c4a");
-        break;
-      case "financial":
-        setApiKey(API_KEY_FINANCIAL);
-        setChannelId("6672911bf26ca561a56cc334");
-        break;
-      case "fitness":
-        setApiKey(API_KEY_FITNESS);
-        setChannelId("6672931a4a838d00b7c4ebcc");
-        break;
-
-      case "sport":
-        setApiKey(API_KEY_SPORT);
-        setChannelId("6672933894b6605ada7ccfc3");
-        break;
-      case "gaming":
-        setApiKey(API_KEY_GAMING);
-        setChannelId("6672935eeeedd308c849b655");
-        break;
-      case "automotive":
-        setApiKey(API_KEY_AUTOMOTIVE);
-        setChannelId("66729381022a6665fcf6931d");
-        break;
-      default:
-        setApiRegion("sg");
-        setApiKey(API_KEY_DEFAULT);
-        break;
-    }
+    if (!category) return;
+    const applicatons = JSON.parse(ASC_APPLICATIONS);
+    console.log("applicatons", JSON.stringify(applicatons));
+    console.log("category", applicatons[category].apiKey);
+    setApiRegion(applicatons[category].region);
+    setApiKey(applicatons[category].apiKey);
+    setChannelId(applicatons[category].channelId);
+    setVideoFileId(applicatons[category].videoFileId);
   };
 
   useEffect(() => {
@@ -210,14 +180,53 @@ export default function LiveChat() {
             <ActivityIndicator color={primaryColor} size="large" />
           </View>
         ) : (
-          <AmityLiveChatPage channelId={channelId} />
+          <View style={styles.container}>
+            <View style={styles.videoPlayer}>
+              <video
+                src={`https://api.${apiRegion}.amity.co/api/v3/files/${videoFileId}/download?size=medium`}
+                muted={true}
+                loop={true}
+                autoPlay={true}
+              />
+            </View>
+            <View style={styles.chatContainer}>
+              <AmityLiveChatPage channelId={channelId} />
+            </View>
+          </View>
         )}
       </AmityUiKitProvider>
     )
   );
 }
+
 const useStyles = () => {
   const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: "column",
+      backgroundColor: "#000",
+      alignItems: "center",
+      justifyContent: "space-between",
+      maxWidth: 600,
+      alignSelf: "center",
+      width: "100%",
+      height: "100%",
+      elevation: 10, // Use elevation for shadow on Android
+      shadowColor: "#000", // Shadow properties for iOS
+      shadowOffset: { width: 0, height: 0 },
+      gap: 10,
+    },
+    videoPlayer: {
+      width: "100%", // Responsive video width
+      height: "30%", // Responsive video height
+      aspectRatio: 16 / 9, // Maintain aspect ratio of 16:9
+      backgroundColor: "black", // Background color for the video player
+      objectFit: "cover", // Cover the video player
+    },
+    chatContainer: {
+      width: "100%",
+      height: "70%",
+    },
     loadingContainer: {
       flex: 1,
       justifyContent: "center",

@@ -6,4 +6,5 @@ declare module "@env" {
   export const API_KEY_TRAVEL: string;
   export const API_KEY_DEFAULT: string;
   export const API_KEY_AUTOMOTIVE: string;
+  export const ASC_APPLICATIONS: string;
 }
