@@ -100,8 +100,6 @@ export default function LiveChat() {
   const chooseCategoryApiKey = (category: string) => {
     if (!category) return;
     const applicatons = JSON.parse(ASC_APPLICATIONS);
-    console.log("applicatons", JSON.stringify(applicatons));
-    console.log("category", applicatons[category].apiKey);
     setApiRegion(applicatons[category].region);
     setApiKey(applicatons[category].apiKey);
     setChannelId(applicatons[category].channelId);
@@ -112,7 +110,11 @@ export default function LiveChat() {
     if (apiKey && userId && apiRegion && channelId && displayName) {
       autoJoinUser();
     }
-  }, [apiKey, userId, apiRegion, channelId, displayName, uiKitConfig]);
+  }, [apiKey, userId, apiRegion, channelId, displayName]);
+
+  useEffect(() => {
+    console.log(uiKitConfig);
+  }, [uiKitConfig]);
 
   const joinUserToChannel = async (channelId: string, accessToken: string) => {
     try {
@@ -173,7 +175,7 @@ export default function LiveChat() {
         apiRegion={apiRegion}
         userId={userId}
         displayName={displayName}
-        theme={uiKitConfig}
+        configs={uiKitConfig as any}
       >
         {loading ? (
           <View style={loading ? styles.loadingContainer : styles.hide}>
