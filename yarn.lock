@@ -131,7 +131,7 @@
 
 "@amityco/ui-kit@./amityco-ui-kit-4.0.0-beta.4.tgz":
   version "4.0.0-beta.4"
-  resolved "./amityco-ui-kit-4.0.0-beta.4.tgz#58b9c6702384abb1549deb9505a0822696c9b849"
+  resolved "./amityco-ui-kit-4.0.0-beta.4.tgz#33ec88ce0175e9eb4b0a2830bdbc62f683df7e2f"
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.36"
     "@fortawesome/free-solid-svg-icons" "^5.15.4"
