@@ -9,7 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@amityco/react-native-chat-ui-kit": "./amityco-react-native-chat-ui-kit-0.2.0.tgz",
+    "@amityco/react-native-chat-ui-kit": "./amityco-react-native-chat-ui-kit-0.1.4.tgz",
     "@amityco/react-native-social-ui-kit": "./amityco-react-native-social-ui-kit-0.4.8.tgz",
     "@amityco/ts-sdk": "^6.26.3",
     "@amityco/ui-kit": "./amityco-ui-kit-4.0.0-beta.4.tgz",

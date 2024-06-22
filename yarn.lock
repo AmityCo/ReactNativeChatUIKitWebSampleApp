@@ -76,29 +76,10 @@
     react-scripts "^5.0.1"
     redux "^4.2.1"
 
-"@amityco/ts-sdk-react-native@^6.16.0":
+"@amityco/ts-sdk-react-native@^6.16.0", "@amityco/ts-sdk-react-native@^6.17.0":
   version "6.27.0"
   resolved "https://registry.yarnpkg.com/@amityco/ts-sdk-react-native/-/ts-sdk-react-native-6.27.0.tgz#88f1d7560be090dbc13fc31fe31163f93a2b0031"
   integrity sha512-kiNMobpLIx/rU+iJjoGVHOR7ib8cMd1yptXsk6CI+578YX9Ji0PZxSUqKQGW1VwVO5nmA86J2MTso7mSgBiFVA==
-  dependencies:
-    "@react-native-async-storage/async-storage" "^1.17.7"
-    "@react-native-community/netinfo" "^9.4.1"
-    agentkeepalive "^4.2.1"
-    axios "^1.2.3"
-    debug "^4.3.4"
-    hls.js "^1.4.10"
-    js-base64 "^3.7.2"
-    mitt "^3.0.0"
-    mqtt "^4.3.7"
-    object-hash "^3.0.0"
-    react-native-uuid "^2.0.1"
-    socket.io-client "2.2.0"
-    ts-jest "^28.0.3"
-
-"@amityco/ts-sdk-react-native@^6.17.0":
-  version "6.19.0"
-  resolved "https://registry.yarnpkg.com/@amityco/ts-sdk-react-native/-/ts-sdk-react-native-6.19.0.tgz#2398072b2e4824135634097fcf62de00da56e8f8"
-  integrity sha512-YQLsPtC2aPLJdMG6CyLGsTyXIk53XPhpYrnEMatZL4DVGZF3apmgZrWtHj5pMCZTw6kpSPRemCxEjjDueZZ3Pw==
   dependencies:
     "@react-native-async-storage/async-storage" "^1.17.7"
     "@react-native-community/netinfo" "^9.4.1"
@@ -9651,14 +9632,7 @@ expo-modules-core@1.11.9:
   dependencies:
     invariant "^2.2.4"
 
-expo-modules-core@^1.11.8:
-  version "1.11.12"
-  resolved "https://registry.yarnpkg.com/expo-modules-core/-/expo-modules-core-1.11.12.tgz#d5c7b3ed7ab57d4fb6885a0d8e10287dcf1ffe5f"
-  integrity sha512-/e8g4kis0pFLer7C0PLyx98AfmztIM6gU9jLkYnB1pU9JAfQf904XEi3bmszO7uoteBQwSL6FLp1m3TePKhDaA==
-  dependencies:
-    invariant "^2.2.4"
-
-expo-modules-core@^1.5.4:
+expo-modules-core@^1.11.8, expo-modules-core@^1.5.4:
   version "1.12.15"
   resolved "https://registry.yarnpkg.com/expo-modules-core/-/expo-modules-core-1.12.15.tgz#62cd2aa46762f29c4c2271a1dfee5f8e3f651130"
   integrity sha512-VjDPIgUyhCZzf692NF4p2iFTsKAQMcU3jc0pg33eNvN/kdrJqkeucqCDuuwoNxg0vIBKtoqAJDuPnWiemldsTg==
@@ -16257,7 +16231,7 @@ string-natural-compare@^3.0.1:
   resolved "https://registry.yarnpkg.com/string-natural-compare/-/string-natural-compare-3.0.1.tgz#7a42d58474454963759e8e8b7ae63d71c1e7fdf4"
   integrity sha512-n3sPwynL1nwKi3WJ6AIsClwBMa0zTi54fn2oLU6ndfTSIO05xaznjSf15PcBZU6FNWbmN5Q6cxT4V5hGvB4taw==
 
-"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.2.0:
+"string-width-cjs@npm:string-width@^4.2.0":
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -16266,7 +16240,7 @@ string-natural-compare@^3.0.1:
     is-fullwidth-code-point "^3.0.0"
     strip-ansi "^6.0.1"
 
-string-width@4.1.0, string-width@^4.1.0, string-width@^4.2.3, string-width@^5.1.2:
+string-width@4.1.0, string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3, string-width@^5.1.2:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.1.0.tgz#ba846d1daa97c3c596155308063e075ed1c99aff"
   integrity sha512-NrX+1dVVh+6Y9dnQ19pR0pP4FiEIlUvdTGn8pw6CKTNq5sgib2nIhmUNT5TAmhWmvKr3WcxBcP3E8nWezuipuQ==
