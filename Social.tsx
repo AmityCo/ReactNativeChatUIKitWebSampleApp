@@ -62,6 +62,7 @@ export default function Social() {
       }
       if (data.type === "saveTheme") {
         if (darkMode) {
+          setPrimaryColor(data.value.primary)
           setUIKitConfig((prevConfig) => ({
             ...prevConfig,
             theme: {
@@ -73,6 +74,7 @@ export default function Social() {
             },
           }));
         } else {
+          setPrimaryColor(data.value.primary)
           setUIKitConfig((prevConfig) => ({
             ...prevConfig,
             theme: {
