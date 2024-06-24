@@ -14,20 +14,14 @@ export default function LiveChat() {
   const [userId, setUserId] = useState<string>("");
   const [apiRegion, setApiRegion] = useState<string>("eu");
   const [loading, setLoading] = useState<boolean>(true);
-  const [channelId, setChannelId] = useState<string>(
-    "6672911bf26ca561a56cc334"
-  );
-  const [videoFileId, setVideoFileId] = useState<string>("");
+  const [channelId, setChannelId] = useState<string | null>(null);
+  const [videoFileId, setVideoFileId] = useState<string | null>(null);
+  const [displayName, setDisplayName] = useState<string | null>(null);
   const [uiKitConfig, setUIKitConfig] = useState({ ...config });
-  const [displayName, setDisplayName] = useState<string>("");
 
   useEffect(() => {
     const handleMessage = (event: { data: { payload: any } }) => {
       console.log("Message event received:", event);
-      // if (event.origin !== 'http://localhost:3000') { // Match this to the parent origin
-      //   console.log('Origin mismatch, message ignored.');
-      //   return;
-      // }
       const data = event.data.payload;
       if (data.type === "theme") {
         if (data.value === "dark") {
@@ -161,7 +155,8 @@ export default function LiveChat() {
       }
 
       const { accessToken } = await response.json();
-      if (accessToken) await joinUserToChannel(channelId, accessToken);
+      if (accessToken && channelId)
+        await joinUserToChannel(channelId, accessToken);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -169,7 +164,8 @@ export default function LiveChat() {
 
   return (
     apiKey &&
-    userId && (
+    userId &&
+    displayName && (
       <AmityUiKitProvider
         apiKey={apiKey}
         apiRegion={apiRegion}
