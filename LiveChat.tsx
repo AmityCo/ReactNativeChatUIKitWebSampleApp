@@ -7,8 +7,6 @@ import config from "./uikit.config.json";
 
 export default function LiveChat() {
   const [darkMode, setDarkMode] = useState<boolean>(false);
-  const styles = useStyles();
-
   const [primaryColor, setPrimaryColor] = useState<string>();
   const [apiKey, setApiKey] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
@@ -19,80 +17,55 @@ export default function LiveChat() {
   const [displayName, setDisplayName] = useState<string | null>(null);
   const [uiKitConfig, setUIKitConfig] = useState({ ...config });
 
+  const styles = useStyles(
+    darkMode
+      ? uiKitConfig.customizations["live_chat/*/*"].theme.dark.background_color
+      : uiKitConfig.customizations["live_chat/*/*"].theme.light.background_color
+  );
+
   useEffect(() => {
-    const handleMessage = (event: { data: { payload: any } }) => {
-      console.log("Message event received:", event);
-      const data = event.data.payload;
-      if (data.type === "theme") {
-        if (data.value === "dark") {
-          setUIKitConfig((prevConfig) => ({
-            ...prevConfig,
-            customizations: {
-              ...prevConfig.customizations,
-              ["live_chat/*/*"]: {
-                ...prevConfig.customizations["live_chat/*/*"],
-                preferred_theme: "dark",
-              },
+    const handleMessage = (event: {
+      data: { payload: { type: any; value: any } };
+    }) => {
+      const { type, value } = event.data.payload;
+      console.log("Message event received:", event.data.payload);
+
+      if (type === "theme") {
+        const themeKey = `live_chat/*/*`;
+        const newTheme = value === "dark" ? "dark" : "light";
+        setUIKitConfig((prevConfig) => ({
+          ...prevConfig,
+          customizations: {
+            ...prevConfig.customizations,
+            [themeKey]: {
+              ...prevConfig.customizations[themeKey],
+              preferred_theme: newTheme,
             },
-          }));
-          setDarkMode(true);
-        } else {
-          setUIKitConfig((prevConfig) => ({
-            ...prevConfig,
-            customizations: {
-              ...prevConfig.customizations,
-              ["live_chat/*/*"]: {
-                ...prevConfig.customizations["live_chat/*/*"],
-                preferred_theme: "light",
-              },
-            },
-          }));
-          setDarkMode(false);
-        }
-        // Handle theme change
-      }
-      if (data.type === "saveTheme") {
-        if (darkMode) {
-          setUIKitConfig((prevConfig) => ({
-            ...prevConfig,
-            customizations: {
-              ...prevConfig.customizations,
-              ["live_chat/*/*"]: {
-                ...prevConfig.customizations["live_chat/*/*"], // Preserve other properties at this level
-                theme: {
-                  ...prevConfig.customizations["live_chat/*/*"].theme,
-                  dark: {
-                    ...prevConfig.customizations["live_chat/*/*"].theme.dark,
-                    primary_color: data.value.primary, // Assuming data.value.primary is defined and has a correct type
-                  },
+          },
+        }));
+        setDarkMode(newTheme === "dark");
+      } else if (type === "saveTheme") {
+        const themeDetails = darkMode ? "dark" : "light";
+        setUIKitConfig((prevConfig) => ({
+          ...prevConfig,
+          customizations: {
+            ...prevConfig.customizations,
+            [`live_chat/*/*`]: {
+              ...prevConfig.customizations[`live_chat/*/*`],
+              theme: {
+                ...prevConfig.customizations[`live_chat/*/*`].theme,
+                [themeDetails]: {
+                  primary_color: value.primary,
+                  background_color: value.background,
+                  base_color: value.base,
+                  base_shade1_color: value.baseShade1,
                 },
               },
             },
-          }));
-        } else {
-          setUIKitConfig((prevConfig) => ({
-            ...prevConfig,
-            customizations: {
-              ...prevConfig.customizations,
-              ["live_chat/*/*"]: {
-                ...prevConfig.customizations["live_chat/*/*"], // Preserve other properties at this level
-                theme: {
-                  ...prevConfig.customizations["live_chat/*/*"].theme,
-                  light: {
-                    ...prevConfig.customizations["live_chat/*/*"].theme.light,
-                    primary_color: data.value.primary, // Assuming data.value.primary is defined and has a correct type
-                  },
-                },
-              },
-            },
-          }));
-        }
-        setPrimaryColor(data.value.primary);
+          },
+        }));
+        setPrimaryColor(value.primary);
       }
-      console.log(
-        "Message received from parent playground:",
-        event.data.payload
-      );
     };
 
     window.addEventListener("message", handleMessage, false);
@@ -222,7 +195,7 @@ export default function LiveChat() {
   );
 }
 
-const useStyles = () => {
+const useStyles = (bgColor: string) => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -243,7 +216,7 @@ const useStyles = () => {
       width: "100%", // Responsive video width
       height: "30%", // Responsive video height
       aspectRatio: 16 / 9, // Maintain aspect ratio of 16:9
-      backgroundColor: "black", // Background color for the video player
+      backgroundColor: bgColor || "#000",
       objectFit: "cover", // Cover the video player
     },
     chatContainer: {
