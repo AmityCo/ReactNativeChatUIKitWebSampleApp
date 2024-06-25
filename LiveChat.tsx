@@ -6,7 +6,7 @@ import { ASC_APPLICATIONS } from "@env";
 import config from "./uikit.config.json";
 
 export default function LiveChat() {
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(true);
   const [primaryColor, setPrimaryColor] = useState<string>();
   const [apiKey, setApiKey] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
