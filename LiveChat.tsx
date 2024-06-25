@@ -170,16 +170,16 @@ export default function LiveChat() {
         ) : (
           <View style={styles.container}>
             <View
-              style={
-                (styles.videoPlayer,
+              style={[
+                styles.videoPlayer,
                 {
                   backgroundColor: darkMode
                     ? uiKitConfig.customizations["live_chat/*/*"].theme.dark
                         .background_color
                     : uiKitConfig.customizations["live_chat/*/*"].theme.light
                         .background_color,
-                })
-              }
+                },
+              ]}
             >
               <video
                 src={`https://api.${apiRegion}.amity.co/api/v3/files/${videoFileId}/download?size=medium`}
