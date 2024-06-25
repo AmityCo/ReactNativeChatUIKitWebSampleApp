@@ -27,13 +27,25 @@ export default function LiveChat() {
         if (data.value === "dark") {
           setUIKitConfig((prevConfig) => ({
             ...prevConfig,
-            preferred_theme: "dark",
+            customizations: {
+              ...prevConfig.customizations,
+              ["live_chat/*/*"]: {
+                ...prevConfig.customizations["live_chat/*/*"],
+                preferred_theme: "dark",
+              },
+            },
           }));
           setDarkMode(true);
         } else {
           setUIKitConfig((prevConfig) => ({
             ...prevConfig,
-            preferred_theme: "light",
+            customizations: {
+              ...prevConfig.customizations,
+              ["live_chat/*/*"]: {
+                ...prevConfig.customizations["live_chat/*/*"],
+                preferred_theme: "light",
+              },
+            },
           }));
           setDarkMode(false);
         }
@@ -43,26 +55,39 @@ export default function LiveChat() {
         if (darkMode) {
           setUIKitConfig((prevConfig) => ({
             ...prevConfig,
-            theme: {
-              ...prevConfig.theme,
-              dark: {
-                ...prevConfig.theme.dark,
-                primary_color: data.value.primary,
+            customizations: {
+              ...prevConfig.customizations,
+              ["live_chat/*/*"]: {
+                ...prevConfig.customizations["live_chat/*/*"], // Preserve other properties at this level
+                theme: {
+                  ...prevConfig.customizations["live_chat/*/*"].theme,
+                  dark: {
+                    ...prevConfig.customizations["live_chat/*/*"].theme.dark,
+                    primary_color: data.value.primary, // Assuming data.value.primary is defined and has a correct type
+                  },
+                },
               },
             },
           }));
         } else {
           setUIKitConfig((prevConfig) => ({
             ...prevConfig,
-            theme: {
-              ...prevConfig.theme,
-              light: {
-                ...prevConfig.theme.light,
-                primary_color: data.value.primary,
+            customizations: {
+              ...prevConfig.customizations,
+              ["live_chat/*/*"]: {
+                ...prevConfig.customizations["live_chat/*/*"], // Preserve other properties at this level
+                theme: {
+                  ...prevConfig.customizations["live_chat/*/*"].theme,
+                  light: {
+                    ...prevConfig.customizations["live_chat/*/*"].theme.light,
+                    primary_color: data.value.primary, // Assuming data.value.primary is defined and has a correct type
+                  },
+                },
               },
             },
           }));
         }
+        setPrimaryColor(data.value.primary);
       }
       console.log(
         "Message received from parent playground:",
