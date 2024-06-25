@@ -17,11 +17,7 @@ export default function LiveChat() {
   const [displayName, setDisplayName] = useState<string | null>(null);
   const [uiKitConfig, setUIKitConfig] = useState({ ...config });
 
-  const styles = useStyles(
-    darkMode
-      ? uiKitConfig.customizations["live_chat/*/*"].theme.dark.background_color
-      : uiKitConfig.customizations["live_chat/*/*"].theme.light.background_color
-  );
+  const styles = useStyles();
 
   useEffect(() => {
     const handleMessage = (event: {
@@ -104,10 +100,6 @@ export default function LiveChat() {
     }
   }, [apiKey, userId, apiRegion, channelId, displayName]);
 
-  useEffect(() => {
-    console.log(uiKitConfig);
-  }, [uiKitConfig]);
-
   const joinUserToChannel = async (channelId: string, accessToken: string) => {
     try {
       const response = await fetch(
@@ -177,7 +169,18 @@ export default function LiveChat() {
           </View>
         ) : (
           <View style={styles.container}>
-            <View style={styles.videoPlayer}>
+            <View
+              style={
+                (styles.videoPlayer,
+                {
+                  backgroundColor: darkMode
+                    ? uiKitConfig.customizations["live_chat/*/*"].theme.dark
+                        .background_color
+                    : uiKitConfig.customizations["live_chat/*/*"].theme.light
+                        .background_color,
+                })
+              }
+            >
               <video
                 src={`https://api.${apiRegion}.amity.co/api/v3/files/${videoFileId}/download?size=medium`}
                 muted={true}
@@ -195,7 +198,7 @@ export default function LiveChat() {
   );
 }
 
-const useStyles = (bgColor: string) => {
+const useStyles = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -216,7 +219,7 @@ const useStyles = (bgColor: string) => {
       width: "100%", // Responsive video width
       height: "30%", // Responsive video height
       aspectRatio: 16 / 9, // Maintain aspect ratio of 16:9
-      backgroundColor: bgColor || "#000",
+      backgroundColor: "#000",
       objectFit: "cover", // Cover the video player
     },
     chatContainer: {
