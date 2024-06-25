@@ -168,19 +168,19 @@ export default function LiveChat() {
             <ActivityIndicator color={primaryColor} size="large" />
           </View>
         ) : (
-          <View style={styles.container}>
-            <View
-              style={[
-                styles.videoPlayer,
-                {
-                  backgroundColor: darkMode
-                    ? uiKitConfig.customizations["live_chat/*/*"].theme.dark
-                        .background_color
-                    : uiKitConfig.customizations["live_chat/*/*"].theme.light
-                        .background_color,
-                },
-              ]}
-            >
+          <View
+            style={[
+              styles.container,
+              {
+                backgroundColor: darkMode
+                  ? uiKitConfig.customizations["live_chat/*/*"].theme.dark
+                      .background_color
+                  : uiKitConfig.customizations["live_chat/*/*"].theme.light
+                      .background_color,
+              },
+            ]}
+          >
+            <View style={styles.videoPlayer}>
               <video
                 src={`https://api.${apiRegion}.amity.co/api/v3/files/${videoFileId}/download?size=medium`}
                 muted={true}
@@ -203,7 +203,6 @@ const useStyles = () => {
     container: {
       flex: 1,
       flexDirection: "column",
-      backgroundColor: "#000",
       alignItems: "center",
       justifyContent: "space-between",
       maxWidth: 600,
@@ -219,7 +218,6 @@ const useStyles = () => {
       width: "100%", // Responsive video width
       height: "30%", // Responsive video height
       aspectRatio: 16 / 9, // Maintain aspect ratio of 16:9
-      backgroundColor: "#000",
       objectFit: "cover", // Cover the video player
     },
     chatContainer: {
