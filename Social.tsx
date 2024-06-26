@@ -5,6 +5,11 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   AmityUiKitProvider,
   AmityUiKitSocial,
+  CommunityHome,
+  ExplorePage,
+  MyCommunityPage,
+  MyUserProfile,
+  Newsfeed,
 } from "@amityco/react-native-social-ui-kit";
 import { ActivityIndicator, View } from "react-native";
 import { StyleSheet } from "react-native";
@@ -18,6 +23,7 @@ import {
   API_KEY_AUTOMOTIVE,
 } from "@env";
 import config from "./uikit.config.json";
+import { UIKitPageID } from "./util/enum";
 
 export default function Social() {
   const styles = useStyles();
@@ -33,6 +39,7 @@ export default function Social() {
   const [displayName, setDisplayName] = useState<string>("topAmity");
   const [apiRegion, setApiRegion] = useState<string>("eu");
   const [loading, setLoading] = useState<boolean>(true);
+  const [selectedPage, setSelectedPage] = useState<string>("")
 
   const [uiKitConfig, setUIKitConfig] = useState({ ...config });
 
@@ -61,31 +68,33 @@ export default function Social() {
         // Handle theme change
       }
       if (data.type === "saveTheme") {
-        if (darkMode) {
-          setPrimaryColor(data.value.primary)
-          setUIKitConfig((prevConfig) => ({
-            ...prevConfig,
-            theme: {
-              ...prevConfig.theme,
-              dark: {
-                ...prevConfig.theme.dark,
-                primary_color: data.value.primary,
-              },
+
+        setPrimaryColor(data.value.primary)
+        setUIKitConfig((prevConfig) => ({
+          ...prevConfig,
+          theme: {
+            ...prevConfig.theme,
+            light: {
+              ...prevConfig.theme.light,
+              primary_color: data.value.primary,
+              background_color: data.value.background,
+              base_color: data.value.base,
+              base_shade1_color: data.value.baseShade1,
+              base_shade4_color: data.value.border,
+
+
             },
-          }));
-        } else {
-          setPrimaryColor(data.value.primary)
-          setUIKitConfig((prevConfig) => ({
-            ...prevConfig,
-            theme: {
-              ...prevConfig.theme,
-              light: {
-                ...prevConfig.theme.light,
-                primary_color: data.value.primary,
-              },
+            dark: {
+              ...prevConfig.theme.dark,
+              primary_color: data.value.primary,
+
             },
-          }));
-        }
+          },
+        }));
+
+      }
+      if (data.type === 'selectedPage') {
+        setSelectedPage(data.value.uiReference)
       }
       console.log(
         "Message received from parent playground:",
@@ -223,7 +232,7 @@ export default function Social() {
     //   setApiRegion(apiRegion);
     //   setLoading(false);
     // } else {
-    chooseCategoryApiKey("travel");
+
     // }
   }, []);
 
@@ -256,6 +265,23 @@ export default function Social() {
     }
   };
 
+  const renderPageByID = (id: string) => {
+    switch (id) {
+      case UIKitPageID.Newsfeed:
+        return <Newsfeed />
+      case UIKitPageID.Explore:
+        return <ExplorePage />
+      case UIKitPageID.CommunityProfile:
+        return <CommunityHome />
+      case UIKitPageID.MyCommunity:
+        return <MyCommunityPage />
+      case UIKitPageID.UserProfile:
+        return <MyUserProfile />
+
+      default:
+        return <AmityUiKitSocial />
+    }
+  }
   const myTheme = {
     primary: primaryColor, // Primary color for main elements
     background: background,
@@ -280,7 +306,7 @@ export default function Social() {
             <ActivityIndicator color={primaryColor} size="large" />
           </View>
         ) : (
-          <AmityUiKitSocial />
+          renderPageByID(selectedPage)
         )}
       </AmityUiKitProvider>
     )
