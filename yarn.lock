@@ -32,9 +32,9 @@
     react-native-progress "^5.0.1"
     react-native-svg "^14.1.0"
 
-"@amityco/react-native-social-ui-kit@./amityco-react-native-social-ui-kit-0.5.2.tgz":
-  version "0.5.2"
-  resolved "./amityco-react-native-social-ui-kit-0.5.2.tgz#bb8c1cdcd2131e2b396398475668d8cab4e02cab"
+"@amityco/react-native-social-ui-kit@./amityco-react-native-social-ui-kit-0.5.3.tgz":
+  version "0.5.3"
+  resolved "./amityco-react-native-social-ui-kit-0.5.3.tgz#f5f25c49547ac64c164ed8c63a0e35400893731d"
   dependencies:
     "@amityco/ts-sdk-react-native" "^6.16.0"
     "@react-native-async-storage/async-storage" "^1.19.0"
@@ -7770,7 +7770,12 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001599, caniuse-lite@^1.0.30001629:
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001599:
+  version "1.0.30001638"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001638.tgz#598e1f0c2ac36f37ebc3f5b8887a32ca558e5d56"
+  integrity sha512-5SuJUJ7cZnhPpeLHaH0c/HPAnAHZvS6ElWyHK9GSIbVOQABLzowiI2pjmpvZ1WEbkyz46iFd4UXlOHR5SqgfMQ==
+
+caniuse-lite@^1.0.30001629:
   version "1.0.30001636"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001636.tgz#b15f52d2bdb95fad32c2f53c0b68032b85188a78"
   integrity sha512-bMg2vmr8XBsbL6Lr0UHXy/21m84FTxDLWn2FSqMd5PrlbMxwJlQnC2YWYxVgp66PZE+BBNF2jYQUBKCo1FDeZg==
