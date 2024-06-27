@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Chat from "./Chat";
 import Social from "./Social";
-import LiveChat from "./LiveChat";
+import LiveChat from "./LiveChatTransparent";
 
 export default function App() {
   return (

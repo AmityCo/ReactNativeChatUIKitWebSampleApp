@@ -240,7 +240,7 @@
           "base_shade3_color": "#a5a9b5",
           "base_shade4_color": "#ebecef",
           "alert_color": "#FA4D30",
-          "background_color": "#FFFFFF",
+          "background_color": "rgba(0,0,0,0)",
           "base_inverse_color": "#000000"
         },
         "dark": {
@@ -260,8 +260,8 @@
     "live_chat/chat_header/*": {
       "theme": {
         "light": {
-          "base_color": "#000000",
-          "base_inverse_color": "#000000"
+          "base_color": "#FFFFFF",
+          "base_inverse_color": "#FFFFFF"
         },
         "dark": {
           "base_color": "#FFFFFF",
@@ -269,35 +269,37 @@
         }
       }
     },
-    "live_chat/message_list/*": {
+    "*/message_list/*": {
       "theme": {
         "light": {
-          "secondary_color": "#292B32",
-          "base_color": "#292b32",
-          "base_shade2_color": "#898e9e",
-          "base_shade3_color": "#a5a9b5",
-          "base_shade4_color": "#ebecef",
-          "base_inverse_color": "#000000"
+          "secondary_color": "#FFFFFF",
+          "base_color": "#FFFFFF",
+          "base_shade2_color": "#FFFFFF",
+          "base_shade3_color": "#FFFFFF",
+          "base_shade4_color": "#FFFFFF",
+          "base_inverse_color": "#FFFFFF"
         },
         "dark": {
-          "secondary_color": "#ebecef",
-          "base_color": "#ebecef",
-          "base_shade2_color": "#6e7487",
-          "base_shade3_color": "#40434e",
-          "base_shade4_color": "#292b32",
-          "base_inverse_color": "#FFFFFF"
+          "secondary_color": "#000000",
+          "base_color": "#000000",
+          "base_shade2_color": "#e74c3c",
+          "base_shade3_color": "#000000",
+          "base_shade4_color": "#FFFFFF",
+          "base_inverse_color": "#000000"
         }
       }
     },
-    "live_chat/message_compose_bar/*": {
+    "*/message_composer/*": {
       "theme": {
         "light": {
           "base_color": "#00FF00",
-          "base_inverse_color": "#00FF00"
+          "base_inverse_color": "#00FF00",
+          "background_color": "#FF0000"
         },
         "dark": {
-          "base_color": "#FFFF00",
-          "base_inverse_color": "#FFFF00"
+          "base_color": "#FF0000",
+          "base_inverse_color": "#FF0000",
+          "background_color": "#FF0000"
         }
       },
       "message_limit": 1,
