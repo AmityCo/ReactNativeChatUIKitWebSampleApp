@@ -54,6 +54,20 @@ export default function LiveChat() {
               ...prevConfig.customizations[themeKey],
               preferred_theme: newTheme,
             },
+            [`*/message_composer/*`]: {
+              ...prevConfig.customizations[`*/message_composer/*`],
+              theme: {
+                ...prevConfig.customizations[`*/message_composer/*`].theme,
+                preferred_theme: newTheme,
+              },
+            },
+            [`*/message_list/*`]: {
+              ...prevConfig.customizations[`*/message_list/*`],
+              theme: {
+                ...prevConfig.customizations[`*/message_list/*`].theme,
+                preferred_theme: newTheme,
+              },
+            },
           },
         }));
         setDarkMode(newTheme === "dark");
@@ -63,10 +77,22 @@ export default function LiveChat() {
           ...prevConfig,
           customizations: {
             ...prevConfig.customizations,
-            [`live_chat/*/*`]: {
-              ...prevConfig.customizations[`live_chat/*/*`],
+            [`*/message_composer/*`]: {
+              ...prevConfig.customizations[`*/message_composer/*`],
               theme: {
-                ...prevConfig.customizations[`live_chat/*/*`].theme,
+                ...prevConfig.customizations[`*/message_composer/*`].theme,
+                [themeDetails]: {
+                  primary_color: value.primary,
+                  background_color: value.background,
+                  base_color: value.base,
+                  base_shade1_color: value.baseShade1,
+                },
+              },
+            },
+            [`*/message_list/*`]: {
+              ...prevConfig.customizations[`*/message_list/*`],
+              theme: {
+                ...prevConfig.customizations[`*/message_list/*`].theme,
                 [themeDetails]: {
                   primary_color: value.primary,
                   background_color: value.background,
