@@ -270,7 +270,6 @@ const useStyles = () => {
       left: 0,
       width: "100%",
       height: "60%",
-      backgroundColor: "rgba(0,0,0,0.0)", // Semi-transparent background for chat area
     },
     loadingContainer: {
       flex: 1,

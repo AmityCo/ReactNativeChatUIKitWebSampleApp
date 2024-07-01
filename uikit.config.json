@@ -21,7 +21,7 @@
       "base_shade3_color": "#40434e",
       "base_shade4_color": "#292b32",
       "alert_color": "#FA4D30",
-      "background_color": "#191919"
+      "background_color": "#FF0000"
     }
   },
   "excludes": [],
@@ -240,7 +240,7 @@
           "base_shade3_color": "#a5a9b5",
           "base_shade4_color": "#ebecef",
           "alert_color": "#FA4D30",
-          "background_color": "rgba(0,0,0,0)",
+          "background_color": "#FF0000",
           "base_inverse_color": "#000000"
         },
         "dark": {
@@ -272,20 +272,20 @@
     "*/message_list/*": {
       "theme": {
         "light": {
-          "secondary_color": "#FFFFFF",
-          "base_color": "#FFFFFF",
-          "base_shade2_color": "#FFFFFF",
-          "base_shade3_color": "#FFFFFF",
-          "base_shade4_color": "#FFFFFF",
-          "base_inverse_color": "#FFFFFF"
+          "secondary_color": "#FF0000",
+          "base_color": "#FF0000",
+          "base_shade2_color": "#FF0000",
+          "base_shade3_color": "#FF0000",
+          "base_shade4_color": "#FF0000",
+          "base_inverse_color": "#FF0000"
         },
         "dark": {
-          "secondary_color": "#000000",
-          "base_color": "#000000",
-          "base_shade2_color": "#e74c3c",
-          "base_shade3_color": "#000000",
-          "base_shade4_color": "#FFFFFF",
-          "base_inverse_color": "#000000"
+          "secondary_color": "#FF0000",
+          "base_color": "#FF0000",
+          "base_shade2_color": "#FF0000",
+          "base_shade3_color": "#FF0000",
+          "base_shade4_color": "#FF0000",
+          "base_inverse_color": "#FF0000"
         }
       }
     },
