@@ -41,7 +41,7 @@ export default function LiveChat() {
       data: { payload: { type: any; value: any } };
     }) => {
       const { type, value } = event.data.payload;
-      console.log("Message event received:", event.data.payload);
+      //console.log("Message event received:", event.data.payload);
 
       if (type === "theme") {
         const themeKey = `live_chat/*/*`;
@@ -56,17 +56,11 @@ export default function LiveChat() {
             },
             [`*/message_composer/*`]: {
               ...prevConfig.customizations[`*/message_composer/*`],
-              theme: {
-                ...prevConfig.customizations[`*/message_composer/*`].theme,
-                preferred_theme: newTheme,
-              },
+              preferred_theme: newTheme,
             },
             [`*/message_list/*`]: {
               ...prevConfig.customizations[`*/message_list/*`],
-              theme: {
-                ...prevConfig.customizations[`*/message_list/*`].theme,
-                preferred_theme: newTheme,
-              },
+              preferred_theme: newTheme,
             },
           },
         }));
@@ -94,8 +88,8 @@ export default function LiveChat() {
               theme: {
                 ...prevConfig.customizations[`*/message_list/*`].theme,
                 [themeDetails]: {
-                  primary_color: value.primary,
-                  background_color: value.background,
+                  base_inverse_color: value.primary,
+                  base_shade4_color: value.background,
                   base_color: value.base,
                   base_shade1_color: value.baseShade1,
                 },
@@ -112,7 +106,7 @@ export default function LiveChat() {
     return () => {
       window.removeEventListener("message", handleMessage, false);
     };
-  }, []);
+  }, [darkMode, primaryColor]);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);

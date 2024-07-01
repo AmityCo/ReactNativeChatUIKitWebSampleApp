@@ -270,10 +270,9 @@
       }
     },
     "*/message_list/*": {
-      "preferred_theme": "dark",
       "theme": {
         "light": {
-          "secondary_color": "#292B32",
+          "secondary_color": "#FF0000",
           "base_color": "#292b32",
           "base_shade2_color": "#898e9e",
           "base_shade3_color": "#a5a9b5",
@@ -291,7 +290,7 @@
       }
     },
     "*/message_composer/*": {
-      "preferred_theme": "dark",
+      "preferred_theme": "light",
       "theme": {
         "light": {
           "base_color": "#292b32",
@@ -302,7 +301,8 @@
         "dark": {
           "base_color": "#ebecef",
           "base_inverse_color": "#FFFFFF",
-          "background_color": "#191919"
+          "alert_color": "#FA4D30",
+          "background_color": "#FF0000"
         }
       },
       "message_limit": 1,
