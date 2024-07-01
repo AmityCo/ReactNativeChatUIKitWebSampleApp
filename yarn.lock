@@ -111,9 +111,9 @@
     react-native-uuid "^2.0.1"
     socket.io-client "2.2.0"
 
-"@amityco/ui-kit@./amityco-ui-kit-open-source-4.0.0-beta.9.tgz":
+"@amityco/ui-kit@./amityco-ui-kit-4.0.0-beta.8.tgz":
   version "4.0.0-beta.8"
-  resolved "./amityco-ui-kit-open-source-4.0.0-beta.9.tgz#d17c9f8fbecfaad7dc0568c7b183a45091c1486d"
+  resolved "./amityco-ui-kit-4.0.0-beta.8.tgz#d17c9f8fbecfaad7dc0568c7b183a45091c1486d"
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.36"
     "@fortawesome/free-solid-svg-icons" "^5.15.4"

@@ -12,7 +12,7 @@
     "@amityco/react-native-chat-ui-kit": "./amityco-react-native-chat-ui-kit-0.1.4.tgz",
     "@amityco/react-native-social-ui-kit": "./amityco-react-native-social-ui-kit-0.5.3.tgz",
     "@amityco/ts-sdk": "^6.26.3",
-    "@amityco/ui-kit": "./amityco-ui-kit-open-source-4.0.0-beta.9.tgz",
+    "@amityco/ui-kit": "./amityco-ui-kit-4.0.0-beta.8.tgz",
     "@expo/metro-runtime": "~3.1.3",
     "@react-navigation/native": "^6.1.10",
     "@react-navigation/native-stack": "^6.9.18",
