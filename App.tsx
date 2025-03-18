@@ -8,6 +8,7 @@ import {
 import Chat from "./Chat";
 import Social from "./Social";
 import LiveChat from "./LiveChatTransparent";
+import Story from "./Story";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/social" element={<Social />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/live-chat" element={<LiveChat />} />
+        <Route path="/story" element={<Story />} />
       </Routes>
     </Router>
   );

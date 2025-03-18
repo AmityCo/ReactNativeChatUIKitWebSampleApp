@@ -2,15 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 // import { Amplify } from "aws-amplify";
 // import amplifyconfig from "./src/amplifyconfiguration.json";
 // Amplify.configure(amplifyconfig);
-import {
-  AmityUiKitProvider,
-  AmityUiKitSocial,
-  CommunityHome,
-  ExplorePage,
-  MyCommunityPage,
-  MyUserProfile,
-  Newsfeed,
-} from "@amityco/react-native-social-ui-kit";
+// import {
+//   AmityUiKitProvider,
+//   AmityUiKitSocial,
+//   CommunityHome,
+//   ExplorePage,
+//   MyCommunityPage,
+//   MyUserProfile,
+//   Newsfeed,
+// } from "@amityco/react-native-social-ui-kit";
+import { AmityUiKitProvider, AmityUiKitSocial } from "@amityco/ui-kit-open-source"
 import { ActivityIndicator, View } from "react-native";
 import { StyleSheet } from "react-native";
 import {
@@ -265,23 +266,23 @@ export default function Social() {
     }
   };
 
-  const renderPageByID = (id: string) => {
-    switch (id) {
-      case UIKitPageID.Newsfeed:
-        return <Newsfeed />
-      case UIKitPageID.Explore:
-        return <ExplorePage />
-      case UIKitPageID.CommunityProfile:
-        return <CommunityHome />
-      case UIKitPageID.MyCommunity:
-        return <MyCommunityPage />
-      case UIKitPageID.UserProfile:
-        return <MyUserProfile />
+  // const renderPageByID = (id: string) => {
+  //   switch (id) {
+  //     case UIKitPageID.Newsfeed:
+  //       return <Newsfeed />
+  //     case UIKitPageID.Explore:
+  //       return <ExplorePage />
+  //     case UIKitPageID.CommunityProfile:
+  //       return <CommunityHome />
+  //     case UIKitPageID.MyCommunity:
+  //       return <MyCommunityPage />
+  //     case UIKitPageID.UserProfile:
+  //       return <MyUserProfile />
 
-      default:
-        return <AmityUiKitSocial />
-    }
-  }
+  //     default:
+  //       return <AmityUiKitSocial />
+  //   }
+  // }
   const myTheme = {
     primary: primaryColor, // Primary color for main elements
     background: background,
@@ -298,16 +299,27 @@ export default function Social() {
         apiRegion={apiRegion}
         userId={userId}
         displayName={displayName}
-        apiEndpoint={`https://api.${apiRegion}.amity.co`}
-        configs={uiKitConfig}
+        configs={uiKitConfig as any}
+
       >
-        {loading ? (
-          <View style={loading ? styles.loadingContainer : styles.hide}>
-            <ActivityIndicator color={primaryColor} size="large" />
-          </View>
-        ) : (
-          renderPageByID(selectedPage)
-        )}
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: "100vw",
+            height: "100dvh",
+          }}
+        >
+          {loading ? (
+            <View style={loading ? styles.loadingContainer : styles.hide}>
+              <ActivityIndicator color={primaryColor} size="large" />
+            </View>
+          ) : (
+            <AmityUiKitSocial />
+          )}
+          <AmityUiKitSocial />
+        </div>
       </AmityUiKitProvider>
     )
   );

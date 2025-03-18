@@ -269,6 +269,7 @@ export default function Social() {
     )
   );
 }
+
 const useStyles = () => {
   const styles = StyleSheet.create({
     loadingContainer: {

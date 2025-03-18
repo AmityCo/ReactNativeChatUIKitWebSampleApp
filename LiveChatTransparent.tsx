@@ -1,11 +1,11 @@
-import "@amityco/ui-kit/dist/index.css";
+import "@amityco/ui-kit-open-source/dist/index.css";
 import React, { useEffect, useRef, useState } from "react";
 import {
   AmityUiKitProvider,
   AmityLiveChatPage,
   AmityLiveChatMessageList,
   AmityLiveChatMessageComposeBar,
-} from "@amityco/ui-kit";
+} from "@amityco/ui-kit-open-source";
 import { Client, ChannelRepository } from "@amityco/ts-sdk";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { ASC_APPLICATIONS } from "@env";

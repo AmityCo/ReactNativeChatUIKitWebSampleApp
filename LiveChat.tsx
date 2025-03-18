@@ -1,6 +1,6 @@
-import "@amityco/ui-kit/dist/index.css";
+import "@amityco/ui-kit-open-source/dist/index.css";
 import React, { useEffect, useState } from "react";
-import { AmityUiKitProvider, AmityLiveChatPage } from "@amityco/ui-kit";
+import { AmityUiKitProvider,  AmityPostDetailPage, AmityLiveChatPage  } from "@amityco/ui-kit-open-source";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { ASC_APPLICATIONS } from "@env";
 import config from "./uikit.config.json";
@@ -189,7 +189,7 @@ export default function LiveChat() {
               />
             </View>
             <View style={styles.chatContainer}>
-              <AmityLiveChatPage channelId={channelId} />
+              <AmityLiveChatPage channelId={channelId as string} />
             </View>
           </View>
         )}
