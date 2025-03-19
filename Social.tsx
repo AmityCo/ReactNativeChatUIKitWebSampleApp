@@ -318,7 +318,7 @@ export default function Social() {
           ) : (
             <AmityUiKitSocial />
           )}
-          <AmityUiKitSocial />
+      
         </div>
       </AmityUiKitProvider>
     )
